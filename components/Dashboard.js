@@ -7,6 +7,7 @@ import {Input, Button} from "@nextui-org/react";
 
 const Dashboard = () => {
   const [value, setValue] = React.useState("");
+
   const savePaper = () =>{
     console.log("value", value)
     setValue("")
@@ -22,7 +23,8 @@ const Dashboard = () => {
           label="URL to paper"
           placeholder="Enter the url to the paper" 
           value={value}
-          onValueChange={setValue}/>
+          onValueChange={setValue}
+        />
         <Button color="primary" className='mt-4' onPress={savePaper}>
           Enter
         </Button>
@@ -31,13 +33,13 @@ const Dashboard = () => {
       <div className='grid grid-cols-2 gap-4'>
         <div>
           <h2 className='text-2xl font-semibold'>To-Read</h2>
+          <ReadingList />
         </div>
         <div>
           <h2 className='text-2xl font-semibold mb-4'>Feed</h2>
           <Feed />
         </div>
       </div>
-      {/* <ReadingList /> */}
     </div>
   )
 }

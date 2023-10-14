@@ -20,7 +20,6 @@ const articles = [
 // get all papers that were saved and marked read by the users the current user is following
 // could do an explore page
 const Feed = (data) => {
-
   return (
     <div>
       {articles.map((article) => 
