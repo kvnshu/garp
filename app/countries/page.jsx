@@ -5,7 +5,7 @@ export default async function Index() {
   const cookieStore = cookies()
   const supabase = createServerComponentClient({ cookies: () => cookieStore })
 
-  const { data: countries } = await supabase.from("countries").select();
+  // const { data: countries } = await supabase.from("countries").select();
 
   return (
     <ul className="my-auto text-foreground">
