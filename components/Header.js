@@ -7,15 +7,7 @@ import LoginButton from './LoginButton';
 import LogoutButton from './LogoutButton'
 import { Avatar } from "@nextui-org/react";
 
-const Header = async () => {
-  //const supabase = createServerComponentClient({ cookies })
-
-  // const {
-  //   data: { user },
-  // } = await supabase.auth.getUser()
-
-  let user = true
-  
+const Header = async ({user}) => {
   let left = (
     <NavbarBrand>
       <a href="/" className="text-3xl font-bold ">
@@ -24,7 +16,7 @@ const Header = async () => {
     </NavbarBrand >
   );
 
-  let right = null;
+  let right = <LoginButton/>;
 
   if (user) {
     left = (
@@ -51,11 +43,8 @@ const Header = async () => {
             </div>
           </PopoverContent>
         </Popover>
-
       </div>
     );
-  } else{
-    right = (<LoginButton/>)
   }
 
   return (

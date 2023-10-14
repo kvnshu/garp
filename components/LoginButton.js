@@ -1,11 +1,11 @@
 import React from "react";
 import { Button } from "@nextui-org/react";
 
-const LoginButton = () => {
+const LoginButton = ({text}) => {
 	return (
 		<a href="/login">
 			<Button color="primary" radius="sm">
-				Log in
+				{text ? text : "Log In"}
 			</Button>
 		</a>
 	);

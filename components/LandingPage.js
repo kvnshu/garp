@@ -10,7 +10,7 @@ const LandingPage = () => {
         <p className='text-1xl'>Keep track of papers you want to read, and discover what your peers are reading.</p>
       </div>
       <div className="mt-8">
-        <LoginButton/>
+        <LoginButton text="Sign up"/>
       </div>
     </div>
 

@@ -10,13 +10,13 @@ export default async function Index() {
   const {
     data: { user },
   } = await supabase.auth.getUser()
-  
+
   const content = user ? <Dashboard /> : <LandingPage />
 
   return (
     <div>
-      <Layout>
-        { content }
+      <Layout user={user}>
+        {content}
       </Layout>
     </div>
   )

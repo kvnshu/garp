@@ -1,12 +1,11 @@
 "use client"
 
 import React from "react";
-
-import { Avatar } from "@nextui-org/react";
 import Layout from "../../components/Layout";
-import { Button, User } from "@nextui-org/react";
-
+import { Avatar } from "@nextui-org/react";
+import { Button } from "@nextui-org/react";
 import {Card, CardBody} from "@nextui-org/react";
+
 // function that gets userID from email
 // async function getUserID(email) {
 // 	const user = await prisma.user.findUnique({
