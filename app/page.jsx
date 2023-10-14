@@ -11,7 +11,10 @@ export default async function Index() {
     data: { user },
   } = await supabase.auth.getUser()
 
-  const content = user ? <Dashboard /> : <LandingPage />
+  const toRead = await supabase.from("paper").select();
+  const feed = [];
+
+  const content = user ? <Dashboard toRead={toRead} feed={feed}/> : <LandingPage />
 
   return (
     <div>

@@ -5,7 +5,8 @@ import ReadingList from './ReadingList';
 import Feed from './Feed';
 import {Input, Button} from "@nextui-org/react";
 
-const Dashboard = () => {
+const Dashboard = ({toRead, feed}) => {
+  console.log("to Read", toRead)
   const [value, setValue] = React.useState("");
 
   const savePaper = () =>{
