@@ -2,14 +2,10 @@
 import React, { useState } from "react"
 import { Input } from "@nextui-org/input";
 import { Button } from "@nextui-org/button";
+import { savePaper } from "./savePaper";
 
 export default function SearchBar() {
   const [searchText, setSearchText] = useState('');
-
-  const savePaper = () => {
-    console.log("value", searchText)
-    setSearchText("")
-  }
 
   return (
     <div className='mb-8'>
@@ -20,9 +16,9 @@ export default function SearchBar() {
           label="URL to paper"
           placeholder="Enter the url to the paper"
           value={searchText}
-          onValueChange={savePaper}
+          onValueChange={setSearchText}
         />
-        <Button color="primary" className='mt-4' onPress={savePaper}>
+        <Button color="primary" className='mt-4' onPress={async () => savePaper(searchText)}>
           Enter
         </Button>
       </div>

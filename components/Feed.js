@@ -1,53 +1,52 @@
-"use client"
+"use server";
+import React from "react";
+import FeedItem from "./FeedItem";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { createServerActionClient } from '@supabase/auth-helpers-nextjs'
+import { cookies } from "next/headers";
 
-import React from "react"
-import {Card, CardHeader, CardBody, CardFooter, Divider, Link, Image, Button} from "@nextui-org/react";
+const savePaper = async () => {
+  'use server';
+  const supabase = createServerActionClient({ cookies });
+  const { error } = await supabase.from('save').insert({ paper_id: data.paper_id, user_id: user.id });
+  console.log("error: ", error);
+  return error;
+} 
 
-const articles = [
-  {
-    id: 1,
-    url: "test1.com",
-  },
-  {
-    id: 2,
-    url: "test2.com",
-  },
-  {
-    id: 3,
-    url: "test3.com",
-  }
-]
-// get all papers that were saved and marked read by the users the current user is following
-// could do an explore page
-const Feed = (data) => {
-  return (
-    <div>
-      {articles.map((article) => 
-        <Card className="max-w-[400px] mb-4">
-          <CardHeader className="flex gap-3">
-            <div className="flex flex-col">
-              <p className="text-md">Kevin just saved this paper</p>
-            </div>
-          </CardHeader>
-          <Divider/>
-          <CardBody>
-            <p>Paper Title</p>
-            <p>{article.url}</p>
-          </CardBody>
-          <Divider/>
-          <CardFooter>
-            <Link
-              isExternal
-              href="https://github.com/nextui-org/nextui"
-            >
-              Read Now
-            </Link>
-            <Button>Save this paper</Button>
-          </CardFooter>
-      </Card>
-      )}
-    </div>
-  )
-}
+// get all papers that were saved by people the user is following
+const Feed = async () => {
+	const supabase = createServerComponentClient({ cookies });
 
-export default Feed
+	const {
+		data: { user },
+	} = await supabase.auth.getUser();
+
+
+
+	// get all users the current user is following
+	const { data: following } = await supabase.from("following").select("user_id2").eq("user_id1", user.id);
+  const followingIds = await following.map((item) => item.user_id2);
+  
+  // console.log("following", followingIds)
+
+  // join to get paper and user info
+  let { data } = await supabase.from("save").select(`
+    paper_id,
+    user_id,
+    created_at,
+    paper(id, url),
+    user(id, email)
+  `).in("user_id", followingIds);
+
+	// console.log("feed", data );
+
+	return (
+		<div>
+			{data.map((article) => (
+				<FeedItem data={article}  />
+			))}
+		</div>
+	);
+};
+
+export default Feed;
