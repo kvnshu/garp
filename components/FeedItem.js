@@ -1,6 +1,6 @@
 import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
 import { Divider } from "@nextui-org/divider";
-import { Button } from "@nextui-org/button";
+// import { Button } from "@nextui-org/button";
 import { Link } from "@nextui-org/link";
 import moment from "moment";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
@@ -45,7 +45,7 @@ export default function FeedItem({ data, paperItems, setPaperItems }) {
 						<p>{data.paper.url}</p>
 					</Link>
 					<p className="mt-2">
-						{moment(data.paper.created_at).fromNow()}
+						{moment(data.created_at).fromNow()}
 					</p>
 					{/* { data ? (
 						<Button onClick={savePaper}>Save this paper</Button>

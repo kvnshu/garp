@@ -26,7 +26,8 @@ const Dashboard = ({ toRead, feed }) => {
 						)
 				`)
 				.eq("read", false)
-				.eq("user_id", user.id);
+				.eq("user_id", user.id)
+        .order('created_at', { ascending: false });
 			setPaperItems(papers);
 		};
 		getData();

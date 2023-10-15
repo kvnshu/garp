@@ -30,7 +30,8 @@ const Feed = ({ paperItems, setPaperItems }) => {
 					user(id, email)
 				`
 				)
-				.in("user_id", followingIds);
+				.in("user_id", followingIds)
+        .order('created_at', { ascending: false });
 
 			setFeedItems(data);
 		};

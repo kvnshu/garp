@@ -6,6 +6,7 @@ import { Card, CardBody } from "@nextui-org/card";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import moment from 'moment';
+import Connections from "../../components/Connections";
 
 export const dynamic = "force-dynamic";
 
@@ -45,6 +46,10 @@ export default async function Page() {
             size="lg"
           />
           {/* <Button className="mt-4 mx-6">Follow</Button> */}
+          <p className="text-base font-semibold mt-16 border-b mb-4">
+            Followers
+          </p>
+          <Connections ></Connections>
         </div>
         <div className="col-span-3">
           <h2 className="text-2xl font-semibold border-b mb-2">
@@ -59,7 +64,6 @@ export default async function Page() {
             <Card key={user.id} className="mb-4" shadow="sm">
               <CardBody>
                 <div>
-                  <p>{user.paper_id}</p>
                   <p>{user.paper.url}</p>
                 </div>
                 <div>
