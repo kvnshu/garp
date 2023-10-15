@@ -4,6 +4,8 @@ import Dashboard from '../components/Dashboard'
 import LandingPage from '../components/LandingPage'
 import Layout from '../components/Layout'
 
+export const dynamic = 'force-dynamic'
+
 export default async function Index() {
   const supabase = createServerComponentClient({ cookies })
 

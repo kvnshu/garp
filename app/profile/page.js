@@ -7,6 +7,9 @@ import { Card, CardBody } from "@nextui-org/card";
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 import { cookies } from 'next/headers'
 
+export const dynamic = 'force-dynamic'
+
+
 export default async function Page() {
 	const supabase = createServerComponentClient({ cookies })
 
