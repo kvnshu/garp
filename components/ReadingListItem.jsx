@@ -1,13 +1,21 @@
 'use client'
 import React from "react";
-import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
+import { Card, CardBody } from "@nextui-org/card";
 import { Link } from "@nextui-org/link";
-
+import { Checkbox } from "@nextui-org/checkbox";
 import moment from 'moment';
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
 export default function ReadingItemList({ paper }) {
-  function handleClick() {
-    console.log('click.')
+  async function handleClick(event) {
+    const supabase = createClientComponentClient()
+    const { error } = await supabase
+      .from('save')
+      .update({ read: true })
+      .eq('id', paper.id)
+    if (error){
+      throw error;
+    }
   }
 
   return (
@@ -21,6 +29,11 @@ export default function ReadingItemList({ paper }) {
             <p>{paper.paper.url}</p>
           </Link>
           <p className="text-md">{moment(paper.paper.created_at).fromNow()}</p>
+          <Checkbox
+            defaultChecked="false"
+            onClick={handleClick}
+          >
+          </Checkbox>
         </CardBody>
       </Card>
     </div>
