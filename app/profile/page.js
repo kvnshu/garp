@@ -17,15 +17,9 @@ export default async function Page() {
 	const userID = user.id
 
 	const savedID = await supabase.from("save").select("id").eq(userID)
-	console.log(savedID)
-
+	// console.log(savedID)
 	//const paperID = await supabase.from("paper").select("id").eq(savedID)
-
-
-	  
-	console.log(user)
-
-
+	// console.log(user)
 
 
 	return (

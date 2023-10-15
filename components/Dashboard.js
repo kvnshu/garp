@@ -4,7 +4,7 @@ import Feed from './Feed';
 import SearchBar from './SearchBar';
 
 const Dashboard = ({toRead, feed}) => {
-  console.log("to Read", toRead)
+  // console.log("to Read", toRead)
 
   return (
     <div>
