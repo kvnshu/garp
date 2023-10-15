@@ -12,10 +12,22 @@ export default async function Page() {
 
 	const {
 		data: { user },
-	  } = await supabase.auth.getUser()
+	} = await supabase.auth.getUser()
+	const email = user.email
+	const userID = user.id
+
+	const savedID = await supabase.from("save").select("id").eq(userID)
+	console.log(savedID)
+
+	//const paperID = await supabase.from("paper").select("id").eq(savedID)
+
+
+	  
 	console.log(user)
 
-	const email = user.email
+
+
+
 	return (
 		<Layout>
 		<div className="grid grid-cols-4 mt-6 mb-6">
@@ -27,7 +39,7 @@ export default async function Page() {
 					src={""}
 					size="lg"
 				/>
-				<Button className="mt-4 mx-5" >Follow</Button>
+				<Button className="mt-4 mx-6" >Follow</Button>
 				
 			</div>
 			<div className="col-span-3">
