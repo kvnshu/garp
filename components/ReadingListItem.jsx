@@ -1,4 +1,3 @@
-'use client'
 import React from "react";
 import { Card, CardBody } from "@nextui-org/card";
 import { Link } from "@nextui-org/link";
@@ -7,9 +6,10 @@ import { Divider } from "@nextui-org/divider";
 import moment from 'moment';
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
-export default function ReadingItemList({ paper }) {
+export default function ReadingItemList({ paper, paperItems, setPaperItems }) {
   async function handleClick(event) {
     const supabase = createClientComponentClient()
+    // update paper
     const { error } = await supabase
       .from('save')
       .update({ read: true })
@@ -17,6 +17,8 @@ export default function ReadingItemList({ paper }) {
     if (error) {
       throw error;
     }
+    const newItems = paperItems.filter(item => item.id != paper.id);
+    setPaperItems(newItems);
   }
 
   return (
@@ -34,7 +36,7 @@ export default function ReadingItemList({ paper }) {
               isExternal
               href={paper.paper.url}
             >
-              <p>{paper.paper.url}</p>
+              <p className="break-all">{paper.paper.url}</p>
             </Link>
             <p className="text-md">{moment(paper.paper.created_at).fromNow()}</p>
           </div>
