@@ -1,5 +1,4 @@
 Feed
 [] Implement Save Paper Button
-[] humanize timestamp
 [] implement read toggle
 [] implement delete
