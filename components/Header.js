@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import { Avatar } from "@nextui-org/avatar";
 import {
 	Navbar,
@@ -11,8 +12,21 @@ import { Popover, PopoverTrigger, PopoverContent } from "@nextui-org/popover";
 import { Button } from "@nextui-org/button";
 import LoginButton from "./LoginButton";
 import LogoutButton from "./LogoutButton";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
-const Header = async ({ user }) => {
+const Header = () => {
+	const [user, setUser] = useState(null);
+	useEffect(() => {
+		const getData = async () => {
+			const supabase = await createClientComponentClient();
+			const {
+				data: { user },
+			} = await supabase.auth.getUser();
+			setUser(user);
+		};
+		getData();
+	}, []);
+
 	let left = (
 		<NavbarBrand>
 			<a href="/" className="text-3xl font-bold ">
