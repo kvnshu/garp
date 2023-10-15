@@ -17,7 +17,7 @@ export default async function Connections() {
         .from('following')
         .select('user!following_user_id2_fkey(id, email)')
         .eq('user_id1', user.id)
-    console.log(data)
+    // console.log(data)
     
     return (
         <div>
