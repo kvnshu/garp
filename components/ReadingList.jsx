@@ -9,7 +9,8 @@ const ReadingList = async () => {
 
   const { data: session } = await supabase.auth.getUser();
   const { data: papers } = await supabase.from('save').select(`
-    user_id,
+  id,  
+  user_id,
     read,
     paper (
       url,
@@ -18,8 +19,6 @@ const ReadingList = async () => {
   `)
   .eq('read', false)
   .eq('user_id', session.user.id)
-
-  // console.log(papers)
 
   return (
     <div>
