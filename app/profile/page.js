@@ -13,19 +13,17 @@ export default async function Page() {
 	const {
 		data: { user },
 	} = await supabase.auth.getUser()
+
 	const email = user.email
-	const userID = user.id
 
-	const savedID = await supabase.from("save").select("id").eq(userID)
-	console.log(savedID)
+	const { data, error } = await supabase
+  		.from('save')
+  		.select('*, paper(url)')
+  		.eq('user_id', user.id)
+		.eq('read', true)
 
-	//const paperID = await supabase.from("paper").select("id").eq(savedID)
-
-
-	  
-	console.log(user)
-
-
+	const first5 = data.slice(0,5)
+	console.log(first5)
 
 
 	return (
@@ -50,32 +48,17 @@ export default async function Page() {
 				<p className="text-2xl font-semibold mt-16 border-b mb-4">
 					What I Have Read
 				</p>
-				<Card className="mb-4" shadow="sm">
-					<CardBody>
-						<p>
-							Make beautiful websites regardless of your design
-							experience.
-						</p>
-						<p>Peter W</p>
-						<p>Link to paper</p>
-					</CardBody>
-				</Card>
-				<Card>
-					<CardBody>
-						<p>
-							Make beautiful websites regardless of your design
-							experience.
-						</p>
-						<p>Peter W</p>
-						<p>Link to paper</p>
-					</CardBody>
-				</Card>
 
-				<div className="mt-8">
-					<p className="text-2xl font-semibold border-b ">
-						What I Have Saved
-					</p>
-				</div>
+				<ul>{first5.map(person => <Card className="mb-4" shadow="sm">
+					<CardBody>
+						<p>
+							{person.paper_id}
+						</p>
+						<p>Author Name</p>
+						<p>{person.paper.url}</p>
+					</CardBody>
+				</Card>)}</ul>
+
 			</div>
 		</div>
 		 </Layout>
