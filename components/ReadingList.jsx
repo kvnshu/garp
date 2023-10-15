@@ -10,16 +10,21 @@ const ReadingList = async () => {
   const { data: session } = await supabase.auth.getUser();
   const { data: papers } = await supabase.from('save').select(`
     user_id,
+    read,
     paper (
       url,
       created_at
     )
-  `).eq('user_id', session.user.id)
+  `)
+  .eq('read', false)
+  .eq('user_id', session.user.id)
+
+  // console.log(papers)
 
   return (
     <div>
       {papers ? (
-        papers.map((paper) => <ReadingItemList key={paper.id} paper={paper} />)
+        papers.map((paper) => <ReadingItemList paper={paper} key={paper.id} />)
       ) : (
         null
       )

@@ -7,7 +7,7 @@ export default function SearchBar() {
   const [searchText, setSearchText] = useState('');
 
   const savePaper = () => {
-    console.log("value", searchText)
+    // console.log("value", searchText)
     setSearchText("")
   }
 
