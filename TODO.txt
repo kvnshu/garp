@@ -1,0 +1,4 @@
+Update papers table when new saves are added
+Insert new saves at the beginning of list and ensure checkbox works
+Ensure signup works
+Implement follow/unfollow
