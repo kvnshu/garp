@@ -2,7 +2,6 @@ import React from "react";
 import ReadingItemList from "./ReadingListItem";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
-import { spawn } from "child_process";
 
 const ReadingList = async () => {
   const cookieStore = cookies()
