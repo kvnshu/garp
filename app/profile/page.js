@@ -4,17 +4,18 @@ import Layout from "../../components/Layout";
 import { Avatar } from "@nextui-org/avatar";
 import { Button } from "@nextui-org/button";
 import { Card, CardBody } from "@nextui-org/card";
+import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
+import { cookies } from 'next/headers'
 
 export default async function Page() {
-	const supabase = createClient(
-		process.env.NEXT_PUBLIC_SUPABASE_URL,
-		process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-	);
+	const supabase = createServerComponentClient({ cookies })
 
-	const { data } = await supabase.from("user").select("email");
+	const {
+		data: { user },
+	  } = await supabase.auth.getUser()
+	console.log(user)
 
-	console.log("articles ", data);
-
+	const email = user.email
 	return (
 		<Layout>
 		<div className="grid grid-cols-4 mt-6 mb-6">
@@ -26,17 +27,16 @@ export default async function Page() {
 					src={""}
 					size="lg"
 				/>
-				<Button className="mt-4 justify-self-center">Follow</Button>
-				{data.map((item, i) => (
-					<div key={i}>{item.email}</div>
-				))}
+				<Button className="mt-4 mx-5" >Follow</Button>
+				
 			</div>
 			<div className="col-span-3">
-				<h2 className="text-2xl font-semibold border-b mb-2">Name</h2>
-				<p className="text-xl">username</p>
+				<h2 className="text-2xl font-semibold border-b mb-2">Email</h2>
+					<p className="text-xl"> {email}
+					</p>
 
 				<p className="text-2xl font-semibold mt-16 border-b mb-4">
-					What I have read
+					What I Have Read
 				</p>
 				<Card className="mb-4" shadow="sm">
 					<CardBody>
@@ -61,7 +61,7 @@ export default async function Page() {
 
 				<div className="mt-8">
 					<p className="text-2xl font-semibold border-b ">
-						What I have saved
+						What I Have Saved
 					</p>
 				</div>
 			</div>
