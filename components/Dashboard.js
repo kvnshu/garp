@@ -1,7 +1,7 @@
 import React from 'react';
 import ReadingList from './ReadingList';
 import Feed from './Feed';
-import SearchBar from './Searchbar';
+import SearchBar from './SearchBar';
 
 const Dashboard = ({toRead, feed}) => {
   console.log("to Read", toRead)
